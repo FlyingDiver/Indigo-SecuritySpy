@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<Devices>
+    <Device id="spyServer" type="custom">
+        <Name>SecuritySpy Server</Name>
+        <ConfigUI>
+            <Field id="address" type="menu">
+                <Label>Server:</Label>
+                <List class="self" method="get_server_list" dynamicReload="true"/>
+                <CallbackMethod>menu_changed_server</CallbackMethod>
+            </Field>
+            <Field type="textfield" id="ip_address" defaultvalue="">
+                <Label>SecuritySpy Server Host:</Label>
+            </Field>
+            <Field type="textfield" id="port" defaultvalue="">
+                <Label>SecuritySpy Server Port:</Label>
+            </Field>
+            <Field type="textfield" id="username" defaultvalue="">
+                <Label>SecuritySpy Username:</Label>
+            </Field>
+            <Field type="textfield" id="password" defaultvalue="" secure="true">
+                <Label>SecuritySpy Password:</Label>
+            </Field>
+        </ConfigUI>
+        <States>
+             <State id="server_id" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>Server ID</TriggerLabel>
+                <ControlPageLabel>Server ID</ControlPageLabel>
+            </State>
+            <State id="server_name" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>Server Name</TriggerLabel>
+                <ControlPageLabel>Server Name</ControlPageLabel>
+            </State>
+            <State id="server_version" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>Server Version</TriggerLabel>
+                <ControlPageLabel>Server Version</ControlPageLabel>
+            </State>
+        </States>
+    </Device>
+    <Device id="spyCamera" type="custom">
+        <Name>SecuritySpy Camera</Name>
+        <ConfigUI>
+             <Field id="address" type="menu">
+                <Label>Server:</Label>
+                <List class="self" method="get_camera_list" dynamicReload="true"/>
+                <CallbackMethod>menu_changed</CallbackMethod>
+            </Field>
+         </ConfigUI>
+        <States>
+            <State id="enabled" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>enabled</TriggerLabel>
+                <ControlPageLabel>enabled</ControlPageLabel>
+            </State>
+            <State id="event_length" defaultValue="">
+                <ValueType>Number</ValueType>
+                <TriggerLabel>event_length</TriggerLabel>
+                <ControlPageLabel>event_length</ControlPageLabel>
+            </State>
+            <State id="event_object" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>event_object</TriggerLabel>
+                <ControlPageLabel>event_object</ControlPageLabel>
+            </State>
+            <State id="event_on" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>event_on</TriggerLabel>
+                <ControlPageLabel>event_on</ControlPageLabel>
+            </State>
+            <State id="event_online" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>event_online</TriggerLabel>
+                <ControlPageLabel>event_online</ControlPageLabel>
+            </State>
+            <State id="event_score_animal" defaultValue="">
+                <ValueType>Number</ValueType>
+                <TriggerLabel>event_score_animal</TriggerLabel>
+                <ControlPageLabel>event_score_animal</ControlPageLabel>
+            </State>
+
+            <State id="event_score_human" defaultValue="">
+                <ValueType>Number</ValueType>
+                <TriggerLabel>event_score_human</TriggerLabel>
+                <ControlPageLabel>event_score_human</ControlPageLabel>
+            </State>
+
+            <State id="event_score_vehicle" defaultValue="">
+                <ValueType>Number</ValueType>
+                <TriggerLabel>event_score_vehicle</TriggerLabel>
+                <ControlPageLabel>event_score_vehicle</ControlPageLabel>
+            </State>
+            <State id="event_start" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>event_start</TriggerLabel>
+                <ControlPageLabel>event_start</ControlPageLabel>
+            </State>
+            <State id="event_type" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>event_type</TriggerLabel>
+                <ControlPageLabel>event_type</ControlPageLabel>
+            </State>
+            <State id="fps" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>fps</TriggerLabel>
+                <ControlPageLabel>fps</ControlPageLabel>
+            </State>
+            <State id="image_height" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>image_height</TriggerLabel>
+                <ControlPageLabel>image_height</ControlPageLabel>
+            </State>
+            <State id="image_width" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>image_width</TriggerLabel>
+                <ControlPageLabel>image_width</ControlPageLabel>
+            </State>
+            <State id="ip_address" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>ip_address</TriggerLabel>
+                <ControlPageLabel>ip_address</ControlPageLabel>
+            </State>
+            <State id="last_motion" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>last_motion</TriggerLabel>
+                <ControlPageLabel>last_motion</ControlPageLabel>
+            </State>
+            <State id="latest_image" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>latest_image</TriggerLabel>
+                <ControlPageLabel>latest_image</ControlPageLabel>
+            </State>
+            <State id="live_stream" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>live_stream</TriggerLabel>
+                <ControlPageLabel>live_stream</ControlPageLabel>
+            </State>
+            <State id="model" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>Camera Model</TriggerLabel>
+                <ControlPageLabel>Camera Model</ControlPageLabel>
+            </State>
+            <State id="name" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>Camera Name</TriggerLabel>
+                <ControlPageLabel>Camera Name</ControlPageLabel>
+            </State>
+            <State id="online" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>online</TriggerLabel>
+                <ControlPageLabel>online</ControlPageLabel>
+            </State>
+            <State id="ptz_capabilities" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>ptz_capabilities</TriggerLabel>
+                <ControlPageLabel>ptz_capabilities</ControlPageLabel>
+            </State>
+            <State id="recording_mode_a" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>recording_mode_a</TriggerLabel>
+                <ControlPageLabel>recording_mode_a</ControlPageLabel>
+            </State>
+            <State id="recording_mode_c" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>recording_mode_c</TriggerLabel>
+                <ControlPageLabel>recording_mode_c</ControlPageLabel>
+            </State>
+            <State id="recording_mode_m" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>recording_mode_m</TriggerLabel>
+                <ControlPageLabel>recording_mode_m</ControlPageLabel>
+            </State>
+            <State id="server_id" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>server_id</TriggerLabel>
+                <ControlPageLabel>server_id</ControlPageLabel>
+            </State>
+            <State id="type" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>type</TriggerLabel>
+                <ControlPageLabel>type</ControlPageLabel>
+            </State>
+            <State id="video_format" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>video_format</TriggerLabel>
+                <ControlPageLabel>video_format</ControlPageLabel>
+            </State>
+         </States>
+    </Device>
+</Devices>

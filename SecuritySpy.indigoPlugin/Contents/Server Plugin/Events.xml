@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Events>
+	<Event id="motion_event">
+        <Name>Camera Motion Event</Name>
+ 		<ConfigUI>
+            <Field id="camera" type="menu">
+                <Label>Button:</Label>
+                <List class="self" filter="any" method="get_camera_list"  dynamicReload="true"/>
+                <CallbackMethod>menu_changed</CallbackMethod>
+            </Field>
+ 		</ConfigUI>
+	</Event>
+	<Event id="person_event">
+        <Name>Person Detected Event</Name>
+ 		<ConfigUI>
+            <Field id="camera" type="menu">
+                <Label>Button:</Label>
+                <List class="self" filter="any" method="get_camera_list"  dynamicReload="true"/>
+                <CallbackMethod>menu_changed</CallbackMethod>
+            </Field>
+ 		</ConfigUI>
+	</Event>
+	<Event id="vehicle_event">
+        <Name>Vehicle Detected Event</Name>
+ 		<ConfigUI>
+            <Field id="camera" type="menu">
+                <Label>Button:</Label>
+                <List class="self" filter="any" method="get_camera_list"  dynamicReload="true"/>
+                <CallbackMethod>menu_changed</CallbackMethod>
+            </Field>
+ 		</ConfigUI>
+	</Event>
+    <Event id="animal_event">
+        <Name>Animal Detected Event</Name>
+ 		<ConfigUI>
+            <Field id="camera" type="menu">
+                <Label>Button:</Label>
+                <List class="self" filter="any" method="get_camera_list"  dynamicReload="true"/>
+                <CallbackMethod>menu_changed</CallbackMethod>
+            </Field>
+ 		</ConfigUI>
+	</Event>
+</Events>
