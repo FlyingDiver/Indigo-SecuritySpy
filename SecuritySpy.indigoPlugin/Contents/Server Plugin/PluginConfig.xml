@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
 <PluginConfig>
 	<SupportURL>https://github.com/FlyingDiver/Indigo-SecuritySpy/issues</SupportURL>
-	<Field id="logLevel" type="menu" defaultValue="10">
+	<Field id="update_frequency" type="textfield" defaultValue="1">
+        <Label>Update device status frequency (minutes):</Label>
+    </Field>
+    <Field id="statusNote" type="label" fontSize="small" fontColor="darkgray">
+        <Label>Minimum update interval is 1 minute.</Label>
+    </Field>
+    <Field id="sep2" type="separator"/>
+	<Field id="log_level" type="menu" defaultValue="10">
 		<Label>Event Logging Level:</Label>
 		<List>
 			<Option value="5">Extra Debugging Messages</Option>

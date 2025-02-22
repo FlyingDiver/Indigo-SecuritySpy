@@ -49,7 +49,7 @@ REASON_CODES = {"128": "Human", "256": "Vehicle", "512": "Animal"}
 def process_camera(server_id, server_credential, camera, include_events):
     """Process the camera json."""
 
-    # If addtional keys are checked, update CAMERA_KEYS
+    # If additional keys are checked, update CAMERA_KEYS
     camera_id = camera["number"]
     # Get if camera is online
     online = camera["connected"] == "yes"

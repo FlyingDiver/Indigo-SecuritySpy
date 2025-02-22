@@ -1,7 +1,7 @@
-# SecuritySpy Revived
+# Spy Connect
 This is a new plugin for SecuritySpy integration with Indigo.  It is not based on any previous plugin, but is a complete rewrite.  
 
-It is designed to work with SecuritySpy 2024.0.0 and later.
+It is designed to work with Indigo 2024.0.0 or later and SecuritySpy 6 or later.
 
 ## Features
 - Provide Indigo event triggers for motion type events in SecuritySpy.

@@ -1,1 +1,2 @@
 zeroconf==0.136.0
+xmltodict==0.14.2

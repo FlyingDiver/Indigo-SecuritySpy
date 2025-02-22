@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>PluginVersion</key>
-	<string>2025.0.0</string>
+	<string>2025.0.1</string>
 	<key>ServerApiVersion</key>
 	<string>3.4</string>
 	<key>IwsApiVersion</key>
 	<string>1.0.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>SecuritySpy</string>
+	<string>Spy Connect</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.flyingdiver.indigoplugin.securityspy</string>
 	<key>CFBundleVersion</key>

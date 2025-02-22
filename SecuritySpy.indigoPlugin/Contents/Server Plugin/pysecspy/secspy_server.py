@@ -4,6 +4,7 @@ import json as pjson
 import logging
 import time
 from base64 import b64encode
+from sched import scheduler
 from typing import Optional
 
 import aiohttp
@@ -44,14 +45,14 @@ class SecSpyServer:
     # pylint: disable=too-many-instance-attributes
 
     def __init__(
-        self,
-        session: aiohttp.ClientSession,
-        host: str,
-        port: int,
-        username: str,
-        password: str,
-        min_classify_score: int = 50,
-        use_ssl: bool = False,
+            self,
+            session: aiohttp.ClientSession,
+            host: str,
+            port: int,
+            username: str,
+            password: str,
+            min_classify_score: int = 50,
+            use_ssl: bool = False,
     ):
         self._host = host
         self._port = port
@@ -103,9 +104,9 @@ class SecSpyServer:
         current_time = time.time()
         device_update = False
         if (
-            force_camera_update
-            or (current_time - DEVICE_UPDATE_INTERVAL_SECONDS)
-            > self._last_device_update_time
+                force_camera_update
+                or (current_time - DEVICE_UPDATE_INTERVAL_SECONDS)
+                > self._last_device_update_time
         ):
             _LOGGER.debug("Doing device update")
             device_update = True
@@ -115,7 +116,7 @@ class SecSpyServer:
             _LOGGER.debug("Skipping device update")
 
         if (
-            current_time - WEBSOCKET_CHECK_INTERVAL_SECONDS
+                current_time - WEBSOCKET_CHECK_INTERVAL_SECONDS
         ) > self._last_websocket_check:
             _LOGGER.debug("Checking websocket")
             self._last_websocket_check = current_time
@@ -136,7 +137,7 @@ class SecSpyServer:
                 self.ws_connection = None
             except Exception:
                 _LOGGER.exception("Could not cancel ws_task")
-        self.ws_task = asyncio.ensure_future(self._setup_streamreader())
+        self.ws_task = asyncio.ensure_future(self._setup_stream_reader())
 
     async def async_disconnect_ws(self):
         """Disconnect the websocket."""
@@ -187,10 +188,10 @@ class SecSpyServer:
         json_response = pjson.loads(pjson.dumps(json_raw))
         nvr = json_response["system"]["server"]
         sys_info = json_response["system"]
-        sched_preset = sys_info.get("schedulepresetlist")
+        scheduler_preset = sys_info.get("schedulepresetlist")
         presets = []
-        if sched_preset is not None:
-            for preset in sched_preset["schedulepreset"]:
+        if scheduler_preset is not None:
+            for preset in scheduler_preset["schedulepreset"]:
                 presets.append(preset)
 
         return {
@@ -269,17 +270,17 @@ class SecSpyServer:
 
         schedule = 1 if enabled else 0
 
-        if mode in RECORDING_TYPE_ACTION:
+        if mode == RECORDING_TYPE_ACTION:
             rec_mode = "A"
             json_id = "recording_mode_a"
-
-        if mode in RECORDING_TYPE_MOTION:
+        elif mode == RECORDING_TYPE_MOTION:
             rec_mode = "M"
             json_id = "recording_mode_m"
-
-        if mode in RECORDING_TYPE_CONTINUOUS:
+        elif mode == RECORDING_TYPE_CONTINUOUS:
             rec_mode = "C"
             json_id = "recording_mode_c"
+        else:
+            raise ValueError(f"Invalid Mode: {mode}")
 
         cam_uri = f"{self._base_url}/setSchedule?cameraNum={camera_id}&schedule={schedule}&override=0&mode={rec_mode}&auth={self._token}"
 
@@ -316,7 +317,7 @@ class SecSpyServer:
 
         return True
 
-    async def set_ptz_preset(self, camera_id: str, preset_id: str, speed: int=50) -> bool:
+    async def set_ptz_preset(self, camera_id: str, preset_id: str, speed: int = 50) -> bool:
         """Set a PTZ Preset."""
         cam_uri = f"{self._base_url}/ptz/command?cameraNum={camera_id}&command={preset_id}&speed={speed}&auth={self._token}"
 
@@ -360,13 +361,13 @@ class SecSpyServer:
         items = json_response["system"]["cameralist"]["camera"]
         cameras = []
         if not isinstance(
-            items,
-            (
-                frozenset,
-                list,
-                set,
-                tuple,
-            ),
+                items,
+                (
+                        frozenset,
+                        list,
+                        set,
+                        tuple,
+                ),
         ):
             cameras.append(items)
         else:
@@ -398,8 +399,8 @@ class SecSpyServer:
         for device_id in self._processed_data:
             self._update_device(device_id, PROCESSED_EVENT_EMPTY)
 
-    async def _setup_streamreader(self):
-        """Setup the Event Websocket."""
+    async def _setup_stream_reader(self):
+        """Set up the Event Websocket."""
         url = f"{self._base_url}/eventStream?version=3&format=multipart&auth={self._token}"
         timeout = aiohttp.ClientTimeout(
             total=None, connect=None, sock_connect=None, sock_read=None
@@ -589,21 +590,24 @@ class SecSpyServer:
             if action_key == "CLASSIFY":
                 # Format: 20220828102950 69 0 CLASSIFY HUMAN 2 VEHICLE 1 ANIMAL 0
                 _LOGGER.debug("CLASSIFY: %s", action_array)
-                # Need to put this is, as animal reuires SS V5.5
+                # Need to put this is, as animal requires SS V5.5
                 try:
                     self.global_event_score_human = action_array[5]
                     self.global_event_score_vehicle = action_array[7]
                     self.global_event_score_animal = action_array[9]
                     self.global_event_object = None
-                except:
+                except Exception as e:
                     self.global_event_score_animal = 0
                 finally:
                     # Set the Event Object to the highest score
-                    if (self.global_event_score_human > self.global_event_score_vehicle) and (self.global_event_score_human > self.global_event_score_animal):
+                    if (self.global_event_score_human > self.global_event_score_vehicle) and (
+                            self.global_event_score_human > self.global_event_score_animal):
                         self.global_event_object = "128"
-                    if (self.global_event_score_vehicle > self.global_event_score_human) and (self.global_event_score_vehicle > self.global_event_score_animal):
+                    if (self.global_event_score_vehicle > self.global_event_score_human) and (
+                            self.global_event_score_vehicle > self.global_event_score_animal):
                         self.global_event_object = "256"
-                    if (self.global_event_score_animal > self.global_event_score_human) and (self.global_event_score_animal > self.global_event_score_vehicle):
+                    if (self.global_event_score_animal > self.global_event_score_human) and (
+                            self.global_event_score_animal > self.global_event_score_vehicle):
                         self.global_event_object = "512"
 
                 # if len(action_array) > 6:
@@ -693,7 +697,7 @@ class SecSpyServer:
         if device_id is None:
             return
 
-        _LOGGER.debug("Procesed event: %s", processed_event)
+        _LOGGER.debug("Processed event: %s", processed_event)
 
         self.fire_event(device_id, processed_event)
 

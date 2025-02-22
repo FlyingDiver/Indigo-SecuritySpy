@@ -1,3 +1,57 @@
 <?xml version="1.0"?>
 <Actions>
+    <Action id="set_camera_enabled" deviceFilter="self.spyCamera">
+        <Name>Enable Camera</Name>
+        <CallbackMethod>set_camera_enabled_action</CallbackMethod>
+        <ConfigUI>
+            <Field id="camera_enable" type="menu">
+                <Label>Enable Camera:</Label>
+        		<List>
+        			<Option value="true">True</Option>
+        			<Option value="false">False</Option>
+        		</List>
+            </Field>
+        </ConfigUI>
+    </Action>
+    <!--
+    <Action id="set_arm_mode" deviceFilter="self.spyCamera">
+        <Name>Enable Camera</Name>
+        <CallbackMethod>set_arm_mode_action</CallbackMethod>
+        <ConfigUI>
+            <Field id="camera_mode" type="menu">
+                <Label>Camera Mode:</Label>
+        		<List>
+        			<Option value="action">Action</Option>
+        			<Option value="on_motion">On Motion</Option>
+        			<Option value="continuous">Continuous</Option>
+        		</List>
+            </Field>
+            <Field id="camera_enable" type="menu">
+                <Label>Enable Camera:</Label>
+        		<List>
+        			<Option value="true">True</Option>
+        			<Option value="false">False</Option>
+        		</List>
+            </Field>
+        </ConfigUI>
+    </Action>
+    <Action id="set_ptz_preset" deviceFilter="self.spyCamera">
+        <Name>Enable Camera</Name>
+        <CallbackMethod>set_ptz_preset_action</CallbackMethod>
+        <ConfigUI>
+            <Field type="textfield" id="ptz_preset_id" defaultvalue="">
+                <Label>PTZ Preset ID:</Label>
+            </Field>
+        </ConfigUI>
+    </Action>
+    <Action id="enable_schedule_preset" deviceFilter="self.spyServer">
+        <Name>Enable Schedule Preset</Name>
+        <CallbackMethod>enable_schedule_preset_action</CallbackMethod>
+        <ConfigUI>
+            <Field type="textfield" id="schedule_preset_id" defaultvalue="">
+                <Label>Schedule Preset ID:</Label>
+            </Field>
+        </ConfigUI>
+    </Action>
+    -->
 </Actions>
