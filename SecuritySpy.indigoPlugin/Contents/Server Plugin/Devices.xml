@@ -186,6 +186,16 @@
                 <TriggerLabel>video_format</TriggerLabel>
                 <ControlPageLabel>video_format</ControlPageLabel>
             </State>
+            <State id="audio_format" defaultValue="">
+                <ValueType>String</ValueType>
+                <TriggerLabel>audio_format</TriggerLabel>
+                <ControlPageLabel>audio_format</ControlPageLabel>
+            </State>
+            <State id="audio_supported" defaultValue="">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>audio_supported</TriggerLabel>
+                <ControlPageLabel>audio_supported</ControlPageLabel>
+            </State>
          </States>
     </Device>
 </Devices>

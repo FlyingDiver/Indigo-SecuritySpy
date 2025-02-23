@@ -104,6 +104,8 @@ def process_camera(server_id, server_credential, camera, include_events):
         "image_height": image_height,
         "fps": str(camera["current-fps"]),
         "video_format": str(camera["video-format"]),
+        "audio_supported": camera["hasaudio"] == "yes",
+        "audio_format": str(camera["audio-format"]),
         "ptz_capabilities": ptz_capabilities,
         "ptz_presets": preset_list,
     }
