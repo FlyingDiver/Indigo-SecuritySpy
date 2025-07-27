@@ -104,7 +104,7 @@ def process_camera(server_id, server_credential, camera, include_events):
         "image_height": image_height,
         "fps": str(camera["current-fps"]),
         "video_format": str(camera["video-format"]),
-        "audio_supported": camera["hasaudio"] == "yes",
+        "audio_supported": camera["hasaudio"] == "yes", # noqa
         "audio_format": str(camera["audio-format"]),
         "ptz_capabilities": ptz_capabilities,
         "ptz_presets": preset_list,
@@ -113,7 +113,7 @@ def process_camera(server_id, server_credential, camera, include_events):
     if server_id is not None:
         camera_update["server_id"] = server_id
     if include_events:
-        # Get the last time motion occured
+        # Get the last time motion occurred
         if camera.get("timesincelastmotion") is not None:
             last_update = int(time.time()) + int(camera["timesincelastmotion"])
             camera_update["last_motion"] = datetime.datetime.fromtimestamp(
@@ -302,7 +302,7 @@ class SecspyDeviceStateMachine:
         return device_id in self._devices
 
     def update(self, device_id, new_json):
-        """Update an device in the state machine."""
+        """Update a device in the state machine."""
         self._devices.setdefault(device_id, {}).update(new_json)
         return self._devices[device_id]
 

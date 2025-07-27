@@ -166,6 +166,8 @@ class Plugin(indigo.PluginBase):
 
         elif device.deviceTypeId == 'spyCamera':
             self.spy_cameras[device.address] = device.id
+            device.stateListOrDisplayStateIdChanged()
+
             if camera_info := self.camera_info.get(device.address):
                 self.update_camera_device(device.address, camera_info)
 
@@ -293,7 +295,7 @@ class Plugin(indigo.PluginBase):
         camera_num = str(int(camera_num))   # remove leading zero
         server_dev = indigo.devices[self.spy_devices[server_id]]
         token = b64encode(bytes(f"{server_dev.pluginProps['username']}:{server_dev.pluginProps['password']}", "utf-8")).decode()
-        enabled = bool(plugin_action.props["camera_enable"])
+        enabled = plugin_action.props["camera_enable"] == "true"
 
         url = f"http://{server_dev.address}/settings-camera?auth={token}"
         data = f"cameraNum={camera_num}&enabled={enabled}"
@@ -302,21 +304,19 @@ class Plugin(indigo.PluginBase):
         self.logger.debug(f"set_camera_enabled_action: result = {ret}")
 
     def set_arm_mode_action(self, plugin_action, device, callerWaitingForResult):
-        self.logger.debug(f"{device.name}: set_arm_mode_action for {device.address}, camera_mode = {plugin_action.props['camera_mode']}, mode_enable = {plugin_action.props['camera_enable']}")
+        self.logger.debug(f"{device.name}: set_arm_mode_action for {device.address}, camera_mode = {plugin_action.props['camera_mode']}, enabled = {plugin_action.props['enabled']}")
 
         server_id, camera_num = device.address.split(':')
         camera_num = str(int(camera_num))   # remove leading zero
         server_dev = indigo.devices[self.spy_devices[server_id]]
         token = b64encode(bytes(f"{server_dev.pluginProps['username']}:{server_dev.pluginProps['password']}", "utf-8")).decode()
 
+        enabled = plugin_action.props["enabled"] == "true"
+        schedule = 1 if enabled else 0
         mode = plugin_action.props["camera_mode"]
-        enabled = bool(plugin_action.props["camera_enable"])
 
-#        cam_uri = f"{self._base_url}/setSchedule?cameraNum={camera_id}&schedule={schedule}&override=0&mode={rec_mode}&auth={self._token}"
+        url = f"http://{server_dev.address}/setSchedule?cameraNum={camera_num}&schedule={schedule}&override=0&mode={mode}&auth={token}"
 
-        url = f"http://{server_dev.address}/settings-camera?auth={token}"
-        data = f"cameraNum={camera_num}&enabled={enabled}"
-        self.logger.debug(f"set_arm_mode_action: url = {url}, data = {data}")
-        ret = requests.post(url, data=data)
+        self.logger.debug(f"set_arm_mode_action: url = {url}")
+        ret = requests.get(url)
         self.logger.debug(f"set_arm_mode_action: result = {ret}")
-

@@ -13,21 +13,20 @@
             </Field>
         </ConfigUI>
     </Action>
-    <!--
     <Action id="set_arm_mode" deviceFilter="self.spyCamera">
-        <Name>Enable Camera</Name>
+        <Name>Set Camera Mode</Name>
         <CallbackMethod>set_arm_mode_action</CallbackMethod>
         <ConfigUI>
             <Field id="camera_mode" type="menu">
                 <Label>Camera Mode:</Label>
         		<List>
-        			<Option value="action">Action</Option>
-        			<Option value="on_motion">On Motion</Option>
-        			<Option value="continuous">Continuous</Option>
+        			<Option value="A">Action</Option>
+        			<Option value="C">Continuous</Option>
+        			<Option value="M">On Motion</Option>
         		</List>
             </Field>
-            <Field id="camera_enable" type="menu">
-                <Label>Enable Camera:</Label>
+            <Field id="enabled" type="menu">
+                <Label>Enabled:</Label>
         		<List>
         			<Option value="true">True</Option>
         			<Option value="false">False</Option>
@@ -35,6 +34,7 @@
             </Field>
         </ConfigUI>
     </Action>
+    <!--
     <Action id="set_ptz_preset" deviceFilter="self.spyCamera">
         <Name>Enable Camera</Name>
         <CallbackMethod>set_ptz_preset_action</CallbackMethod>

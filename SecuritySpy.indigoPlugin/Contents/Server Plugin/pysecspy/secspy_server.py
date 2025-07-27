@@ -4,7 +4,6 @@ import json as pjson
 import logging
 import time
 from base64 import b64encode
-from sched import scheduler
 from typing import Optional
 
 import aiohttp
